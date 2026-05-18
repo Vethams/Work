@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Job Hunt Report – N. Manjula</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f1a;
+    --surface: #151827;
+    --surface2: #1e2235;
+    --accent: #6c63ff;
+    --accent2: #ff6584;
+    --gold: #f5c842;
+    --green: #3ecf8e;
+    --orange: #ff9f43;
+    --text: #e8eaf6;
+    --muted: #8892b0;
+    --border: rgba(108,99,255,0.18);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    padding: 2rem 1rem 4rem;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+
+  /* HEADER */
+  .header {
+    text-align: center;
+    padding: 3rem 1rem 2.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2.5rem;
+    position: relative;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 320px; height: 320px;
+    background: radial-gradient(circle, rgba(108,99,255,0.13) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .badge {
+    display: inline-block;
+    background: rgba(108,99,255,0.15);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 900;
+    background: linear-gradient(135deg, #fff 30%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.4rem;
+  }
+  .header p { color: var(--muted); font-size: 14px; }
+
+  /* SECTIONS */
+  .section { margin-bottom: 3rem; }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title span.icon { font-size: 1.1rem; }
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+    margin-bottom: 1.5rem;
+    opacity: 0.35;
+  }
+
+  /* PROFILE SUMMARY GRID */
+  .profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  @media(max-width:600px){ .profile-grid { grid-template-columns: 1fr; } }
+  .profile-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.2rem 1.4rem;
+  }
+  .profile-card h4 { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    background: rgba(108,99,255,0.1);
+    border: 1px solid rgba(108,99,255,0.25);
+    color: #c7c3ff;
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+  .tag.tech { background: rgba(62,207,142,0.08); border-color: rgba(62,207,142,0.25); color: #7fffd4; }
+  .tag.gold { background: rgba(245,200,66,0.08); border-color: rgba(245,200,66,0.25); color: var(--gold); }
+
+  /* ROLES SECTION */
+  .roles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  .role-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .role-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .role-card .role-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+  .role-card h4 { font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 3px; }
+  .role-card p { font-size: 12px; color: var(--muted); }
+
+  /* JOB CARDS */
+  .prob-label {
+    font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 4px 12px; border-radius: 20px; display: inline-block;
+    margin-bottom: 1rem; font-weight: 600;
+  }
+  .high { background: rgba(62,207,142,0.12); color: var(--green); border: 1px solid rgba(62,207,142,0.3); }
+  .medium { background: rgba(255,159,67,0.12); color: var(--orange); border: 1px solid rgba(255,159,67,0.3); }
+  .stretch { background: rgba(255,101,132,0.12); color: var(--accent2); border: 1px solid rgba(255,101,132,0.3); }
+
+  .job-list { display: flex; flex-direction: column; gap: 1rem; }
+  .job-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.3rem 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.5rem 1rem;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .job-card:hover { border-color: var(--accent); background: var(--surface2); }
+  .job-main { grid-column: 1; }
+  .job-right { grid-column: 2; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+  .job-title { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 2px; }
+  .job-company { font-size: 13px; color: var(--accent); font-weight: 500; }
+  .job-loc { font-size: 12px; color: var(--muted); margin-bottom: 5px; }
+  .job-desc { font-size: 13px; color: #aab0c6; margin-top: 4px; }
+  .fit-score {
+    display: flex; flex-direction: column; align-items: center;
+    background: rgba(108,99,255,0.1);
+    border: 1px solid rgba(108,99,255,0.25);
+    border-radius: 10px;
+    padding: 8px 14px;
+    min-width: 58px;
+  }
+  .fit-score .num { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 900; color: var(--gold); }
+  .fit-score .lbl { font-size: 9px; letter-spacing: 1px; color: var(--muted); text-transform: uppercase; }
+  .apply-btn {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+  }
+  .apply-btn:hover { opacity: 0.82; }
+  @media(max-width:600px){
+    .job-card { grid-template-columns: 1fr; }
+    .job-right { flex-direction: row; align-items: center; }
+  }
+
+  /* RESUME TIPS */
+  .tips-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+  .tip {
+    background: var(--surface);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 10px 10px 0;
+    padding: 1rem 1.3rem;
+    display: flex; gap: 12px; align-items: flex-start;
+  }
+  .tip .tip-num {
+    background: var(--accent); color: #fff;
+    font-size: 11px; font-weight: 700;
+    width: 22px; height: 22px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .tip strong { color: #fff; display: block; font-size: 14px; margin-bottom: 2px; }
+  .tip p { font-size: 13px; color: #aab0c6; }
+
+  /* FOOTER */
+  footer { text-align: center; color: var(--muted); font-size: 12px; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+
+  .fit-high .num { color: var(--green); }
+  .fit-mid .num { color: var(--orange); }
+  .fit-low .num { color: var(--accent2); }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="badge">🤖 AI Recruiter Report</div>
+    <h1>N. Manjula — Job Hunt Guide</h1>
+    <p>M.Sc Computer Science · 2026 Fresher · Tamil Nadu · Generated May 2026</p>
+  </div>
+
+  <!-- PROFILE SNAPSHOT -->
+  <div class="section">
+    <div class="section-title"><span class="icon">👤</span> Profile Snapshot</div>
+    <div class="divider"></div>
+    <div class="profile-grid">
+      <div class="profile-card">
+        <h4>Soft Skills</h4>
+        <div class="tag-list">
+          <span class="tag">Customer Communication</span>
+          <span class="tag">Problem Solving</span>
+          <span class="tag">Team Collaboration</span>
+          <span class="tag">Product Assistance</span>
+          <span class="tag">User Support</span>
+          <span class="tag">Client Relationship</span>
+        </div>
+      </div>
+      <div class="profile-card">
+        <h4>Technical Skills</h4>
+        <div class="tag-list">
+          <span class="tag tech">HTML5 / CSS3</span>
+          <span class="tag tech">PHP</span>
+          <span class="tag tech">MySQL</span>
+          <span class="tag tech">JavaScript</span>
+          <span class="tag tech">MS Excel</span>
+          <span class="tag tech">MS Word</span>
+        </div>
+      </div>
+      <div class="profile-card">
+        <h4>Certifications & Extras</h4>
+        <div class="tag-list">
+          <span class="tag gold">TCS iON Career Edge (3 courses)</span>
+          <span class="tag gold">Python – Marcello Tech</span>
+          <span class="tag gold">CEFR B1 English</span>
+          <span class="tag gold">Typewriting First Class</span>
+          <span class="tag gold">Academic Class Topper (UG & PG)</span>
+        </div>
+      </div>
+      <div class="profile-card">
+        <h4>Projects</h4>
+        <div class="tag-list">
+          <span class="tag">Student Attendance Mgmt System</span>
+          <span class="tag">Charity Management System</span>
+          <span class="tag">BSNL Internship</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RECOMMENDED ROLES -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🎯</span> Top Roles to Target</div>
+    <div class="divider"></div>
+    <div class="roles-grid">
+      <div class="role-card"><div class="role-icon">🌟</div><h4>Customer Success Associate</h4><p>Best fit — combines communication + tech knowledge</p></div>
+      <div class="role-card"><div class="role-icon">🖥️</div><h4>Technical Support Executive</h4><p>BSNL internship + web skills make you stand out</p></div>
+      <div class="role-card"><div class="role-icon">💻</div><h4>Junior Web Developer</h4><p>HTML, CSS, PHP, MySQL projects prove capability</p></div>
+      <div class="role-card"><div class="role-icon">📊</div><h4>Data Entry / MIS Executive</h4><p>Excel skills + typing first class = easy entry</p></div>
+      <div class="role-card"><div class="role-icon">🎧</div><h4>Customer Support Executive</h4><p>High volume of openings across Tamil Nadu BPOs</p></div>
+      <div class="role-card"><div class="role-icon">🗃️</div><h4>Database / SQL Assistant</h4><p>MySQL project experience adds credibility</p></div>
+      <div class="role-card"><div class="role-icon">📱</div><h4>IT Support / Help Desk</h4><p>Networking internship + troubleshooting mindset</p></div>
+      <div class="role-card"><div class="role-icon">📣</div><h4>Business Development Trainee</h4><p>Communication skills + TCS job readiness cert</p></div>
+    </div>
+  </div>
+
+  <!-- HIGH PROBABILITY JOBS -->
+  <div class="section">
+    <div class="section-title"><span class="icon">✅</span> High Probability Jobs</div>
+    <div class="divider"></div>
+    <span class="prob-label high">🟢 Strong Match — Apply First</span>
+    <div class="job-list">
+
+      <div class="job-card">
+        <div class="job-main">
+          <div class="job-title">Customer Success Associate (Fresher – 2026)</div>
+          <div class="job-company">Twin Health</div>
+          <div class="job-loc">📍 Chennai, Tamil Nadu</div>
+          <div class="job-desc">Manage onboarding, support customers and ensure product value delivery. Freshers preferred; Hindi/Malayalam a plus but not mandatory. Your CS background + communication skills are a direct fit.</div>
+        </div>
+        <div class="job-right">
+          <div class="fit-score fit-high"><span class="num">92</span><span class="lbl">Fit</span></div>
+          <a class="apply-btn" href="https://in.indeed.com/q-2025-freshers-l-chennai,-tamil-nadu-jobs.html" target="_blank">Apply →</a>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-main">
+          <div class="job-title">Web Developer Trainee (Fresher)</div>
+          <div class="job-company">Arnis Tech Inc.</div>
+          <div class="job-loc">📍 Chennai, Tamil Nadu</div>
+          <div class="job-desc">Build and maintain web applications using HTML, CSS, PHP, MySQL. Qualification: MCA/M.Sc (PG fresher eligible). Your projects and M.Sc CS degree are a near-perfect match.</div>
+        </div>
+        <div class="job-right">
+          <div class="fit-score fit-high"><span class="num">91</span><span class="lbl">Fit</span></div>
+          <a class="apply-btn" href="https://in.indeed.com/q-php-fresher-l-chennai,-tamil-nadu-jobs.html" target="_blank">Apply →</a>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-main">
+          <div class="job-title">Customer Support Executive (CSE) – Fresher</div>
+          <div class="job-company">Concentrix</div>
+          <div class="job-loc">📍 Chennai, Tamil Nadu</div>
+          <div class="job-desc">Handle customer queries via calls/email/chat. Maintain records of interactions. MNC with structured training for freshers. Strong demand for Tamil Nadu candidates.</div>
+        </div>
+        <div class="job-right">
+          <div class="fit-score fit-high"><span class="num">89</span><span class="lbl">Fit</span></div>
+          <a class="apply-btn" href="https://in.indeed.com/q-fresher,-concentrix-l-chennai,-tamil-nadu-jobs.html" target="_blank">Apply →</a>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-main">
+          <div class="job-title">Junior PHP Developer (0–1 yr, Freshers Welcome)</div>
+          <div class="job-company">Aspira Technology</div>
+          <div class="job-loc">📍 Chromepet, Chennai</div>
+          <div class="job-desc">PHP + MySQL development role. Freshers with strong fundamentals welcomed. Your Attendance Management System project directly demonstrates required skills.</div>
+        </div>
+        <div class="job-right">
+          <div class="fit-score fit-high"><span class="num">88</span><span class="lbl">Fit</span></div>
+          <a class="apply-btn" href="https://in.indeed.com/q-php-fresher-l-chennai,-tamil-nadu-jobs.html" target="_blank">Apply →</a>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-main">
+          <div class="job-title">Technical Support Executive (Fresher)</div>
+          <div class="job-company">Fogwing – AI Powered Operations Platform</div>
+          <div class="job-loc">📍 Chennai, Tamil Nadu</div>
+          <div class="job-desc">Provide customer support via calls, emails, and virtual meetings. Maintain records. SaaS startup with good growth potential for freshers who show initiative.</div>
+        </div>
+        <div class="job-right">
+          <div class="fit-score fit-high"><span class="num">87</span><span class="lbl">Fit</span></div>
+          <a class="apply-btn" href="https://in.indeed.com/q-it-support-fresher-chennai-l-chennai,-tamil-nadu-jobs.html" target="_blank">Apply →</a>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-main">
+          <div class="job-title">Client Success Associate (Fresher – 2026 Pass-out)</div>
+          <div class="job-company">Recruit CRM (via Internshala)</div>
+          <div class="job-loc">📍 Remote / Tamil Nadu</div>
+          <div class="job-desc">Explain product to international clients, work with CS + Engineering teams. Exclusively for 2026 freshers regardless of specialization. Your communication skills + CS background = ideal profile.</div>
+        </div>
+        <div class="job-right">
+          <div class="fit-score fit-high"><span class="num">90</span><span class="lbl">Fit</span></div>
+          <a class="apply-btn" href="https://internshala.com/fresher-jobs/jobs-in-tamil-nadu/" target="_blank">Apply →</a>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-main">
+          <div class="job-title">Customer Success Associate</div>
+          <div class="job-company">Nadi Technologies Pvt. Ltd.</div>
+          <div class="job-loc">📍 Chennai, Tamil Nadu</div>
+          <div class="job-desc">Build positive customer relationships, ensure product value delivery, confirm customer understanding. Customer-oriented role with full training provided.</div>
+        </div>
+        <div class="job-right">
+          <div class="fit-score fit-high"><span class="num">86</span><span class="lbl">Fit</span></div>
+          <a class="apply-btn" href="https://www.glassdoor.com/Job/tamil-nadu-customer-service-associate-jobs-SRCH_IL.0,10_IS4953_KO11,37.htm" target="_blank">Apply →</a>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-main">
+          <div class="job-title">Data Entry Operator / MIS Executive (Fresher)</div>
+          <div class="job-company">Multiple Employers (JP Inc, SKYSR Corporate Solutions)</div>
+          <div class="job-loc">📍 Chennai, Coimbatore, Erode – Tamil Nadu</div>
+          <div class="job-desc">Accurately enter and update data in databases and spreadsheets. Freshers welcome. Typewriting First Class + Excel skills give you a clear advantage here. Multiple openings across TN.</div>
+        </div>
+        <div class="job-right">
+          <div class="fit-score fit-high"><span class="num">85</span><span class="lbl">Fit</span></div>
+          <a class="apply-btn" href="https://apna.co/jobs/title_data_entry_mis-freshers-jobs-in-tamil_nadu-state" target="_blank">Apply →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MEDIUM PROBABILITY JOBS -->
+  <div class="section">
+    <div class="section-title"><span class="icon">⚡</span> Medium Probability Jobs</div>
+    <div class="divider"></div>
+    <span class="prob-label medium">🟡 Good Match — Apply with a Strong Cover Letter</span>
+    <div class="job-list">
+
+      <div class="job-card">
+        <div class="job-main">
+          <div class="job-title">Frontend HTML Developer</div>
+          <div class="job-company">Gtect Systems</div>
+          <div class="job-loc">📍 Chennai, Tamil Nadu</div>
+          <div class="job-desc">HTML, CSS, JavaScript, jQuery, Responsive Frameworks. Fresher 2026 batch eligible. Needs stronger JavaScript knowledge — highlight your Charity Management System project.</div>
+        </div>
+        <div class="job-right">
+          <div class="fit-score fit-mid"><span class="num">78</span><span class="lbl">Fit</span></div>
+          <a class="apply-btn" href="https://in.indeed.com/q-web-developer-fresher,-frontend-developer-l-chennai,-tamil-nadu-jobs.html" target="_blank">Apply →</a>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-main">
+          <div class="job-title">Software Developer – Fresher (2026 Batch)</div>
+          <div class="job-company">Propel Technology Group</div>
+          <div class="job-loc">📍 Chennai, Tamil Nadu</div>
+          <div class="job-desc">Entry-level software role for 2026 pass-outs with strong programming fundamentals. Requires broader coding depth — supplement with a Python or JavaScript mini-project.</div>
+        </div>
+        <div class="job-right">
+          <div class="fit-score fit-mid"><span class="num">75</span><span class="lbl">Fit</span></div>
+          <a class="apply-btn" href="https://in.indeed.com/q-2026-fresher-l-tamil-nadu-jobs.html" target="_blank">Apply →</a>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-main">
+          <div class="job-title">Non-Voice Process Executive (Chat/Email Support)</div>
+          <div class="job-company">VelSource Staffing / Multiple BPOs</div>
+          <div class="job-loc">📍 Chennai, Tamil Nadu</div>
+          <div class="job-desc">Address customer inquiries through email, chat, and social media. Excellent written communication required. 2026 freshers eligible. Strong demand in Chennai BPO sector.</div>
+        </div>
+        <div class="job-right">
+          <div class="fit-score fit-mid"><span class="num">80</span><span class="lbl">Fit</span></div>
+          <a class="apply-btn" href="https://in.indeed.com/q-freshers-l-chennai,-tamil-nadu-jobs.html" target="_blank">Apply →</a>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-main">
+          <div class="job-title">Web Developer Intern → Full-Time</div>
+          <div class="job-company">Ascendas Technologies</div>
+          <div class="job-loc">📍 Chennai, Tamil Nadu</div>
+          <div class="job-desc">Build responsive websites using HTML, CSS, and best development practices. Open to any degree candidates, freshers and career-break candidates eligible. Good pathway to full-time.</div>
+        </div>
+        <div class="job-right">
+          <div class="fit-score fit-mid"><span class="num">77</span><span class="lbl">Fit</span></div>
+          <a class="apply-btn" href="https://in.indeed.com/q-fresher-web-developer-l-chennai,-tamil-nadu-jobs.html" target="_blank">Apply →</a>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-main">
+          <div class="job-title">Desktop Support Engineer (0–3 yrs)</div>
+          <div class="job-company">VR Infomatic</div>
+          <div class="job-loc">📍 Chennai, Tamil Nadu</div>
+          <div class="job-desc">Provide technical assistance, troubleshoot software/hardware issues. BSNL networking internship adds credibility. Will need to brush up on hardware troubleshooting basics.</div>
+        </div>
+        <div class="job-right">
+          <div class="fit-score fit-mid"><span class="num">74</span><span class="lbl">Fit</span></div>
+          <a class="apply-btn" href="https://in.indeed.com/q-it-support-fresher-chennai-l-chennai,-tamil-nadu-jobs.html" target="_blank">Apply →</a>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-main">
+          <div class="job-title">Trainee Executive – HR / Admin / BizDev</div>
+          <div class="job-company">Zenjade Automation Technology Pvt. Ltd.</div>
+          <div class="job-loc">📍 Chennai, Tamil Nadu</div>
+          <div class="job-desc">Multi-track trainee role (HR, Admin, or Business Development based on interest). Freshers 2023–2026 eligible. Tamil Nadu candidates preferred. Good for building corporate exposure.</div>
+        </div>
+        <div class="job-right">
+          <div class="fit-score fit-mid"><span class="num">72</span><span class="lbl">Fit</span></div>
+          <a class="apply-btn" href="https://in.indeed.com/q-freshers-l-chennai,-tamil-nadu-jobs.html" target="_blank">Apply →</a>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-main">
+          <div class="job-title">Junior Web & Oracle Database Developer</div>
+          <div class="job-company">Levarus Solutions Pvt. Ltd.</div>
+          <div class="job-loc">📍 Chennai, Tamil Nadu</div>
+          <div class="job-desc">Database + web development combined role. HTML, CSS, JavaScript and SQL knowledge required. MySQL project experience is relevant; Oracle is a stretch but learnable.</div>
+        </div>
+        <div class="job-right">
+          <div class="fit-score fit-mid"><span class="num">73</span><span class="lbl">Fit</span></div>
+          <a class="apply-btn" href="https://in.indeed.com/q-mysql-developer-fresher-l-tamil-nadu-jobs.html" target="_blank">Apply →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- STRETCH ROLES -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🚀</span> Stretch Roles</div>
+    <div class="divider"></div>
+    <span class="prob-label stretch">🔴 Aspirational — Upskill First, Then Apply</span>
+    <div class="job-list">
+
+      <div class="job-card">
+        <div class="job-main">
+          <div class="job-title">MERN Stack Developer (Fresher)</div>
+          <div class="job-company">Digitivity Solutions Pvt. Ltd.</div>
+          <div class="job-loc">📍 Perungudi, Chennai</div>
+          <div class="job-desc">Frontend + backend using MongoDB, Express, React, Node. Requires learning React and Node.js — doable in 2–3 months with free resources. High demand, high salary potential.</div>
+        </div>
+        <div class="job-right">
+          <div class="fit-score fit-low"><span class="num">58</span><span class="lbl">Fit</span></div>
+          <a class="apply-btn" href="https://in.indeed.com/q-fresher-web-developer-l-tamil-nadu-jobs.html" target="_blank">View →</a>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-main">
+          <div class="job-title">AI & Full Stack Developer (Fresher)</div>
+          <div class="job-company">Vanuston Intelligence</div>
+          <div class="job-loc">📍 Saidapet, Chennai</div>
+          <div class="job-desc">Full stack + AI tools. Academic/personal projects involving AI tools needed. Upskill: try building a simple ML project using Python (you already have Python from Marcello cert).</div>
+        </div>
+        <div class="job-right">
+          <div class="fit-score fit-low"><span class="num">55</span><span class="lbl">Fit</span></div>
+          <a class="apply-btn" href="https://in.indeed.com/q-fresher-web-developer-l-tamil-nadu-jobs.html" target="_blank">View →</a>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-main">
+          <div class="job-title">Product Analyst Trainee</div>
+          <div class="job-company">Amalgamations Valeo Clutch Pvt. Ltd.</div>
+          <div class="job-loc">📍 Chennai, Tamil Nadu</div>
+          <div class="job-desc">Collect, analyze data; track product performance. Requires analytical skills and data tools exposure. Supplement your Excel skills with basic Power BI or Google Data Studio.</div>
+        </div>
+        <div class="job-right">
+          <div class="fit-score fit-low"><span class="num">60</span><span class="lbl">Fit</span></div>
+          <a class="apply-btn" href="https://in.indeed.com/q-freshers-l-chennai,-tamil-nadu-jobs.html" target="_blank">View →</a>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-main">
+          <div class="job-title">Fresher / Junior Web Developer – AI Product</div>
+          <div class="job-company">Vanuston / Startup (Coimbatore)</div>
+          <div class="job-loc">📍 Coimbatore, Tamil Nadu</div>
+          <div class="job-desc">Web development for an AI product. Requires React or modern JS framework. Build a small React project and add to your GitHub portfolio — this role becomes achievable in 60 days.</div>
+        </div>
+        <div class="job-right">
+          <div class="fit-score fit-low"><span class="num">62</span><span class="lbl">Fit</span></div>
+          <a class="apply-btn" href="https://in.indeed.com/q-fresher-web-developer-l-tamil-nadu-jobs.html" target="_blank">View →</a>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-main">
+          <div class="job-title">Investment Banking / Accounts Associate</div>
+          <div class="job-company">Skillmary Learning Pvt. Ltd.</div>
+          <div class="job-loc">📍 Chennai, Tamil Nadu</div>
+          <div class="job-desc">Finance domain role for 2026 freshers. Requires B.Com/BBA background — not ideal for CS but Excel + analytical profile could still qualify. Best approached with a strong cover letter.</div>
+        </div>
+        <div class="job-right">
+          <div class="fit-score fit-low"><span class="num">45</span><span class="lbl">Fit</span></div>
+          <a class="apply-btn" href="https://in.indeed.com/q-2026-fresher-l-tamil-nadu-jobs.html" target="_blank">View →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RESUME TIPS -->
+  <div class="section">
+    <div class="section-title"><span class="icon">✏️</span> Quick Resume Improvements</div>
+    <div class="divider"></div>
+    <ul class="tips-list">
+      <li class="tip">
+        <div class="tip-num">1</div>
+        <div>
+          <strong>Add a GitHub Profile Link</strong>
+          <p>Upload your two projects (Attendance System + Charity System) to GitHub with a README. Paste the GitHub URL next to your portfolio link. Recruiters and developers check this first.</p>
+        </div>
+      </li>
+      <li class="tip">
+        <div class="tip-num">2</div>
+        <div>
+          <strong>Quantify Your Achievements</strong>
+          <p>Instead of "Developed a web-based attendance system," write "Developed a web-based attendance system managing records for 200+ students, reducing manual tracking time by ~40%." Numbers get noticed.</p>
+        </div>
+      </li>
+      <li class="tip">
+        <div class="tip-num">3</div>
+        <div>
+          <strong>Fix the Aggregate Formatting</strong>
+          <p>Your resume says "9.34%" but you mean 9.34 CGPA. Clarify: "CGPA: 9.34 / 10." Recruiters may misread the percentage sign as a percentage score (which would be extremely low).</p>
+        </div>
+      </li>
+      <li class="tip">
+        <div class="tip-num">4</div>
+        <div>
+          <strong>Add a "Key Projects" Tech Stack Badge Row</strong>
+          <p>Below each project, add: Technologies: HTML5 | CSS3 | PHP | MySQL | JavaScript | Bootstrap. This ensures ATS systems pick up all your skills even if the recruiter skims quickly.</p>
+        </div>
+      </li>
+      <li class="tip">
+        <div class="tip-num">5</div>
+        <div>
+          <strong>Mention BSNL Internship Duration</strong>
+          <p>Add the exact dates (Month Year – Month Year) and mention it gave you a BSNL Certificate. Duration + certification signals commitment and official recognition.</p>
+        </div>
+      </li>
+      <li class="tip">
+        <div class="tip-num">6</div>
+        <div>
+          <strong>Add a "Languages Known" Row</strong>
+          <p>Tamil (Native), English (CEFR B1 – Cambridge Certified). Many Tamil Nadu employers and BPOs specifically want Tamil + English bilingual candidates. Make it visible.</p>
+        </div>
+      </li>
+      <li class="tip">
+        <div class="tip-num">7</div>
+        <div>
+          <strong>Create a 1-Page ATS-Friendly Version</strong>
+          <p>Keep the full resume as backup, but prepare a clean 1-page PDF (no tables, no columns) for uploading to Naukri, LinkedIn, and Indeed. ATS systems often fail to parse multi-column formats.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- JOB PORTALS -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🔗</span> Where to Apply Daily</div>
+    <div class="divider"></div>
+    <div class="profile-grid">
+      <div class="profile-card">
+        <h4>Primary Portals</h4>
+        <div class="tag-list">
+          <span class="tag gold"><a href="https://www.naukri.com" target="_blank" style="color:inherit;text-decoration:none">Naukri.com</a></span>
+          <span class="tag gold"><a href="https://in.indeed.com" target="_blank" style="color:inherit;text-decoration:none">Indeed.in</a></span>
+          <span class="tag gold"><a href="https://www.linkedin.com/jobs" target="_blank" style="color:inherit;text-decoration:none">LinkedIn Jobs</a></span>
+          <span class="tag gold"><a href="https://internshala.com" target="_blank" style="color:inherit;text-decoration:none">Internshala</a></span>
+        </div>
+      </div>
+      <div class="profile-card">
+        <h4>Secondary / Niche Portals</h4>
+        <div class="tag-list">
+          <span class="tag"><a href="https://apna.co" target="_blank" style="color:inherit;text-decoration:none">Apna.co</a></span>
+          <span class="tag"><a href="https://www.glassdoor.co.in" target="_blank" style="color:inherit;text-decoration:none">Glassdoor</a></span>
+          <span class="tag"><a href="https://www.workindia.in" target="_blank" style="color:inherit;text-decoration:none">WorkIndia</a></span>
+          <span class="tag"><a href="https://www.simplyhired.co.in" target="_blank" style="color:inherit;text-decoration:none">SimplyHired</a></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Generated by AI Recruiter · Based on N. Manjula's resume · May 2026<br>
+    All job links point to live search pages. Availability may vary — check portals daily.
+  </footer>
+
+</div>
+</body>
+</html>
